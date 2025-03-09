@@ -6,6 +6,7 @@ import com.book_a_pitch.bapAPI.common.responses.Result;
 import com.book_a_pitch.bapAPI.services.interfaces.IPitchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,9 @@ public class PitchController {
 
     @GetMapping
     public ResponseEntity<Result<List<PitchDto>>> get() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        var email = authentication.getName();
+        System.out.println("This request was done by user: " + email);
         var response = pitchService.getAllPitches();
         return new ResponseEntity<>(response,
                 response.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
