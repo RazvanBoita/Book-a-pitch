@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.UUID;
 
 public interface BookingRepository extends JpaRepository<Booking, UUID> {
+//    @Query("SELECT b FROM Booking b WHERE b.pitch.pitchId = :pitchId")
+//    List<Booking> findBookingsByPitchId(@Param("pitchId") Long pitchId);
+    List<Booking> findByPitchPitchId(Long pitchId);
+    List<Booking> findByUserUserId(UUID userId);
+
 
     @Query("SELECT b FROM Booking b WHERE b.pitch.pitchId = :pitchId AND " +
             "((b.startTime < :endTime AND b.endTime > :startTime))")

@@ -1,10 +1,8 @@
 package com.book_a_pitch.bapAPI.common.config;
 
-import com.book_a_pitch.bapAPI.common.utils.JwtFilter;
+import com.book_a_pitch.bapAPI.common.utils.jwt.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

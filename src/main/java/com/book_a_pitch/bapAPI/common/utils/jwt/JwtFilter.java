@@ -1,4 +1,4 @@
-package com.book_a_pitch.bapAPI.common.utils;
+package com.book_a_pitch.bapAPI.common.utils.jwt;
 
 import com.book_a_pitch.bapAPI.services.implementations.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;

@@ -3,6 +3,7 @@ package com.book_a_pitch.bapAPI.controllers;
 
 import com.book_a_pitch.bapAPI.common.dtos.PitchDto;
 import com.book_a_pitch.bapAPI.common.responses.Result;
+import com.book_a_pitch.bapAPI.repositories.UserRepository;
 import com.book_a_pitch.bapAPI.services.interfaces.IPitchService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,19 +19,23 @@ import java.util.List;
 public class PitchController {
 
     private final IPitchService pitchService;
+    private final UserRepository userRepository;
 
-    public PitchController(IPitchService pitchService) {
+    public PitchController(IPitchService pitchService, UserRepository userRepository) {
         this.pitchService = pitchService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
     public ResponseEntity<Result<List<PitchDto>>> get() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
-        var email = authentication.getName();
-        System.out.println("This request was done by user: " + email);
+//        var email = authentication.getName();
+//        System.out.println("This request was done by user with email: " + email);
+//        var uid = userRepository.findByEmail(email).get().getUserId();
+//        System.out.println("This request was done by user with uuid: " + uid);
+
         var response = pitchService.getAllPitches();
         return new ResponseEntity<>(response,
                 response.isSuccess() ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
-
 }

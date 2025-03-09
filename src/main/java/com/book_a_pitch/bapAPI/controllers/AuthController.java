@@ -2,7 +2,7 @@ package com.book_a_pitch.bapAPI.controllers;
 
 import com.book_a_pitch.bapAPI.common.dtos.AuthDto;
 import com.book_a_pitch.bapAPI.services.implementations.CustomUserDetailsService;
-import com.book_a_pitch.bapAPI.common.utils.JwtUtil;
+import com.book_a_pitch.bapAPI.common.utils.jwt.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

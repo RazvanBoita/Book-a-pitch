@@ -1,4 +1,4 @@
-package com.book_a_pitch.bapAPI.common.utils;
+package com.book_a_pitch.bapAPI.common.utils.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

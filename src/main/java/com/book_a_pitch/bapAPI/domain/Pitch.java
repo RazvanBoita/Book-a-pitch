@@ -1,5 +1,6 @@
 package com.book_a_pitch.bapAPI.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class Pitch {
     private Double pricePerHour;
 
     @OneToMany(mappedBy = "pitch")
+    @JsonManagedReference
     private List<Booking> bookingList = new ArrayList<>();
 
     @Column(nullable = false)
