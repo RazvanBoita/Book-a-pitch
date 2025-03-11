@@ -32,13 +32,28 @@ public class BookingValidator {
             throw new InvalidBookingException(BookingErrors.EndTimeBeforeStartTime);
         }
 
+
         long minutes = Duration.between(startTime, endTime).toMinutes();
-        if (minutes != 120 && minutes != 60) {
+        if (minutes != 120) {
             throw new InvalidBookingException(BookingErrors.InvalidDuration);
         }
 
-        if(startTime.getMinute() != 0 && startTime.getMinute() != 30){
+        if(startTime.getMinute() != 0){
             throw new InvalidBookingException(BookingErrors.InvalidHour);
+        }
+    }
+
+    public void validateBookingForGivenPitch(BookingRequest bookingRequest){
+        var pitch = pitchRepository.findById(bookingRequest.getPitchId());
+        if (pitch.isEmpty()){
+            throw new InvalidBookingException(BookingErrors.PitchDoesntExist);
+        }
+
+        boolean isOpeningHourEven = (pitch.get().getOpeningHour().getHour() % 2 == 0);
+        boolean isBookingStartEven = (bookingRequest.getStartTime().getHour() % 2 == 0);
+
+        if(isOpeningHourEven != isBookingStartEven) {
+            throw new InvalidBookingException(BookingErrors.InvalidBookingForPitch);
         }
     }
 
@@ -67,6 +82,12 @@ public class BookingValidator {
                 pitch.getOpeningHour().isAfter(bookingRequest.getStartTime().toLocalTime())
         ){
             throw new InvalidBookingException(BookingErrors.ViolationOfPitchHours);
+        }
+    }
+
+    public void validateDaysFromToday(int daysFromToday){
+        if(daysFromToday < 0 || daysFromToday > 7){
+            throw new InvalidBookingException(BookingErrors.InvalidGivenDays);
         }
     }
 
